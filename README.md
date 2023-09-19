@@ -6,7 +6,7 @@ Before installing the this project, we need to make sure that our system has all
 
 - node(version - 16)
 
-## Step 2: Go To project directory and composer install
+## Step 2: Go To project directory and run following commands
 
 - first go to the project directory
 
