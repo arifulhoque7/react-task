@@ -7,6 +7,7 @@ const Problem2 = () => {
   const [contacts, setContacts] = useState([]);
   const [isUS, setIsUS] = useState(false);
   const [onlyEven, setOnlyEven] = useState(false);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     fetchContacts();
@@ -14,8 +15,11 @@ const Problem2 = () => {
 
   const fetchContacts = async () => {
     let url = isUS
-      ? "https://contact.mediusware.com/api/country-contacts/United%20States/?page=1&page_size=600"
+      ? "https://contact.mediusware.com/api/country-contacts/United%20States/?page=1&page_size=10"
       : "https://contact.mediusware.com/api/contacts/?page=1&page_size=600";
+    if (search) {
+      url += `&search=${search}`;
+    }
     const response = await axios.get(url);
     let data = response.data.results;
     if (onlyEven) {
@@ -54,6 +58,7 @@ const Problem2 = () => {
         </div>
         <Modal
           isOpen={modalIsOpen}
+          ariaHideApp={false}
           onRequestClose={() => setModalIsOpen(false)}
         >
           <button
@@ -88,7 +93,7 @@ const Problem2 = () => {
               setOnlyEven(e.target.checked);
             }}
           />
-          <label for="evenOnly"> Only even</label>
+          <label htmlFor="evenOnly"> Only even</label>
           <input
             type="text"
             id="search"
